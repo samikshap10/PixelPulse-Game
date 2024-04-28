@@ -16,7 +16,7 @@
 #define NACK 	        I2C0->C1 |= I2C_C1_TXAK_MASK
 #define ACK           I2C0->C1 &= ~I2C_C1_TXAK_MASK
 
-#define LCD_ADDR 0x4E
+#define LCD_ADDR 0x40
 void i2c_init(void);
 
 void i2c_start(void);
