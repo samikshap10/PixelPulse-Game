@@ -41,7 +41,7 @@ int main(void) {
     i2c_init();
     PRINTF("AFTER I2C");
     init_I2C_LCD();
-//    i2c_write_byte(0x41);
+    i2c_write_byte(0x41);
 
     while(1) {
 
