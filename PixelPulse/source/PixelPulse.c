@@ -19,6 +19,7 @@
 #include "LCD.h"
 #include "I2C.h"
 #include "delay.h"
+#include "button.h"
 /* TODO: insert other include files here. */
 
 /* TODO: insert other definitions and declarations here. */
@@ -26,6 +27,9 @@
 /*
  * @brief   Application entry point.
  */
+
+
+
 int main(void) {
 
     /* Init board hardware. */
@@ -36,12 +40,16 @@ int main(void) {
     /* Init FSL debug console. */
     BOARD_InitDebugConsole();
 #endif
-
+    SysTick_Init();
     PRINTF("PROJECT\n\r");
     i2c_init();
     PRINTF("AFTER I2C");
-    init_I2C_LCD();
-    i2c_write_byte(0x41);
+//    init_I2C_LCD();
+    initializeIRQ();
+    PRINTF("After initialize IRQ");
+//    i2c_write_byte(0x41);
+    PRINTF("AFTER EVERYTHING");
+
 
     while(1) {
 

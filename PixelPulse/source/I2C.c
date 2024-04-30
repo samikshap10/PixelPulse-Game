@@ -12,9 +12,9 @@ void i2c_init(void)
 	//set pins to I2C function
 	PORTC->PCR[8] |= PORT_PCR_MUX(2);
 	PORTC->PCR[9] |= PORT_PCR_MUX(2);
-	//set to 100k baud
+	//set to 400k baud
 	//baud = bus freq/(scl_div+mul)
- 	//~400k = 24M/(64); icr=0x12 sets scl_div to 64
+ 	//60 = 24M/(400k); icr=0x11 sets scl_div to 56
 	// Disable I2C module
  	I2C0->F = (I2C_F_ICR(0x11) | I2C_F_MULT(0));
 
