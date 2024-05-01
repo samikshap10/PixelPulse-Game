@@ -115,23 +115,23 @@ I2C_M_START;
 //I2C1->S |= I2C_S_IICIF_MASK;
 I2C0->D = LCD_ADDR;
 I2C_WAIT;
-Delay(30000); //1ms delay
+Delay(15000); //1ms delay
 ;
 I2C0->D = ((data & 0xF0) | EHi); //higher
 I2C_WAIT;
-Delay(30000);
+Delay(15000);
 
 I2C0->D = ((data & 0xF0) | ELo);
 I2C_WAIT;
-Delay(30000);
+Delay(15000);
 
 I2C0->D = (((data << 4) & 0xF0) | EHi);
 I2C_WAIT;
-Delay(30000);
+Delay(15000);
 ;
 I2C0->D = (((data << 4) & 0xF0) | ELo);
 I2C_WAIT;
-Delay(30000);
+Delay(15000);
 
 I2C_M_STOP;
 

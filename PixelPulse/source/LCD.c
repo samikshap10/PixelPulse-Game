@@ -2,7 +2,8 @@
 #include "I2C.h"
 #include "LCD.h"
 #include "fsl_debug_console.h"
-// Run position 1
+
+
 static uint8_t run_position_1[] = {
     0x0C, 0x0C, 0x00, 0x0E, 0x1C, 0x0C, 0x1A, 0x13, // Run position 1
 	0x0C, 0x0C, 0x00, 0x0C, 0x0C, 0x0C, 0x0C, 0x0E, // Run position 2
@@ -11,19 +12,17 @@ static uint8_t run_position_1[] = {
 	0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, // Ground
 	0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, // Ground right
 	0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, // Ground left
-
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
 
 void init_I2C_LCD(void)
 {
-//PRINTF(" IN INIT\n\r");
-
 LCD_Write_4bit_CMD(0x02); // set 4 bit
 Delay(10000);
 LCD_Write_4bit_CMD(0x28); // Function Set  - 4 bit Interface, 1 = 2 lines, 0 = 5x8 font
 Delay(10000);
-LCD_Write_4bit_CMD(0x0F); // Clear Screen
+LCD_Write_4bit_CMD(0x0C); // Display Set, Cursor position and cursor blinking OFF
 Delay(10000);
 LCD_Write_4bit_CMD(0x01); // Clear Screen
 Delay(10000);
@@ -33,18 +32,19 @@ Delay(10000);
 void create_custom_char(void){
 
 	LCD_Write_4bit_CMD(0x40 | 0x00);
-    for (int i = 0; i < 56; i++) {
+    for (int i = 0; i < 64; i++) {
     	i2c_write_byte(run_position_1[i]);
     }
 
     LCD_Write_4bit_CMD(0x80| 0x40);
-    i2c_write_byte(0x00);
-    i2c_write_byte(0x01);
-    i2c_write_byte(0x02);
-    i2c_write_byte(0x03);
-    i2c_write_byte(0x04);
-    i2c_write_byte(0x05);
-    i2c_write_byte(0x06);
+    LCD_Write_4bit_CMD(0x01);
+//    i2c_write_byte(0x00);
+//    i2c_write_byte(0x01);
+//    i2c_write_byte(0x02);
+//    i2c_write_byte(0x03);
+//    i2c_write_byte(0x04);
+//    i2c_write_byte(0x05);
+//    i2c_write_byte(0x06);
 
 
 }

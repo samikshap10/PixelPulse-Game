@@ -20,6 +20,7 @@
 #include "I2C.h"
 #include "delay.h"
 #include "button.h"
+#include "game.h"
 /* TODO: insert other include files here. */
 
 /* TODO: insert other definitions and declarations here. */
@@ -48,8 +49,12 @@ int main(void) {
 //    i2c_write_byte(0x41);
     PRINTF("AFTER EVERYTHING");
     create_custom_char();
+    init_game_fun();
 
     while(1) {
+//    	if (isButtonPressed){
+    	game_play();
+//    }
 
     }
     return 0 ;
