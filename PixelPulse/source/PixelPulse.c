@@ -43,13 +43,11 @@ int main(void) {
     SysTick_Init();
     PRINTF("PROJECT\n\r");
     i2c_init();
-    PRINTF("AFTER I2C");
-//    init_I2C_LCD();
+    init_I2C_LCD();
     initializeIRQ();
-    PRINTF("After initialize IRQ");
 //    i2c_write_byte(0x41);
     PRINTF("AFTER EVERYTHING");
-
+    create_custom_char();
 
     while(1) {
 

@@ -38,10 +38,9 @@ void i2c_write_byte(uint8_t data)
 {
 // input must be in form of 0x0c or 0xc
 // For instructions RS & RW =0
-//PRINTF("AT START\n\r");
 uint8_t EHi = 0x0D;
 uint8_t ELo = 0x08;
-
+Delay(1000);
 I2C_TRAN;
 I2C_M_START;
 //I2C1->S |= I2C_S_IICIF_MASK;
@@ -69,6 +68,40 @@ I2C_M_STOP;
 
 }
 
+void i2c_custom_byte(uint8_t data)
+{
+// input must be in form of 0x0c or 0xc
+// For instructions RS & RW =0
+uint8_t EHi = 0x0D;
+uint8_t ELo = 0x08;
+Delay(1000);
+I2C_TRAN;
+I2C_M_START;
+//I2C1->S |= I2C_S_IICIF_MASK;
+I2C0->D = LCD_ADDR;
+I2C_WAIT;
+Delay(30000); //1ms delay
+;
+I2C0->D = ((data & 0xF0) | EHi | 0x40); //higher
+I2C_WAIT;
+Delay(30000);
+
+I2C0->D = ((data & 0xF0) | ELo | 0x40);
+I2C_WAIT;
+Delay(30000);
+
+I2C0->D = (((data << 4) & 0xF0) | EHi | 0x40);
+I2C_WAIT;
+Delay(30000);
+;
+I2C0->D = (((data << 4) & 0xF0) | ELo | 0x40);
+I2C_WAIT;
+Delay(30000);
+
+I2C_M_STOP;
+
+}
+
 void LCD_Write_4bit_CMD(uint8_t data)
 {
 // input must be in form of 0x0c or 0xc
@@ -76,7 +109,7 @@ void LCD_Write_4bit_CMD(uint8_t data)
 //PRINTF("AT START\n\r");
 uint8_t EHi = 0x0C;
 uint8_t ELo = 0x08;
-
+Delay(10000);
 I2C_TRAN;
 I2C_M_START;
 //I2C1->S |= I2C_S_IICIF_MASK;

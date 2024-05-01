@@ -26,3 +26,4 @@ uint8_t i2c_repeated_read(uint8_t);
 uint8_t i2c_read_byte(uint8_t dev, uint8_t address);
 void LCD_Write_4bit_CMD(uint8_t data);
 void i2c_write_byte(uint8_t data);
+void i2c_custom_byte(uint8_t data);
