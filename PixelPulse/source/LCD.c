@@ -20,13 +20,20 @@ void init_I2C_LCD(void)
 {
 LCD_Write_4bit_CMD(0x02); // set 4 bit
 Delay(10000);
-LCD_Write_4bit_CMD(0x28); // Function Set  - 4 bit Interface, 1 = 2 lines, 0 = 5x8 font
+LCD_Write_4bit_CMD(0x20); // Function Set  - 4 bit Interface, 1 = 2 lines, 0 = 5x8 font
 Delay(10000);
 LCD_Write_4bit_CMD(0x0C); // Display Set, Cursor position and cursor blinking OFF
 Delay(10000);
 LCD_Write_4bit_CMD(0x01); // Clear Screen
 Delay(10000);
 
+}
+void i2c_write_string(const char* str) {
+    // Loop through each character in the string until the null terminator is reached
+    for (size_t i = 0; str[i] != '\0'; ++i) {
+        // Send each character over I2C
+    	i2c_write_byte(str[i]);
+    }
 }
 
 void create_custom_char(void){
@@ -47,5 +54,49 @@ void create_custom_char(void){
 //    i2c_write_byte(0x06);
 
 
+}
+
+void testLCD(void){
+
+    LCD_Write_4bit_CMD(0x80 | 0x00);
+    i2c_write_string("LCD TEST LINE 1");
+
+    LCD_Write_4bit_CMD(0x80 | 0x14);
+    i2c_write_string("LCD TEST LINE 2");
+    for(int i =0; i<=100; i++){
+    	Delay(1000000000);
+    }
+
+}
+
+void automatedTest(void){
+	LCD_Write_4bit_CMD(0x01);
+    LCD_Write_4bit_CMD(0x80 | 0x00);
+    i2c_write_byte(0x00);
+
+    LCD_Write_4bit_CMD(0x80 | 0x13);
+    i2c_write_byte(0x01);
+
+    LCD_Write_4bit_CMD(0x80 | 0x0A);
+    i2c_write_byte(0x00);
+
+    LCD_Write_4bit_CMD(0x80 | 0x1E);
+    i2c_write_byte(0x01);
+
+    LCD_Write_4bit_CMD(0x80 | 0x14);
+    i2c_write_byte(0x00);
+
+    LCD_Write_4bit_CMD(0x80 | 0x27);
+    i2c_write_byte(0x01);
+
+    LCD_Write_4bit_CMD(0x80 | 0x40);
+    i2c_write_byte(0x00);
+
+    LCD_Write_4bit_CMD(0x80 | 0x54);
+    i2c_write_byte(0x01);
+
+    for(int i =0; i<=100; i++){
+    	Delay(1000000000);
+    }
 }
 

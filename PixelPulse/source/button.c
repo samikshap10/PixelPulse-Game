@@ -34,8 +34,9 @@ void PORTD_IRQHandler(void){
 
 	// Check if enough time has elapsed since the last trigger
 	if ((currentTime - lastTriggerTime) >= DEBOUNCE_TIME_MS){
-	PRINTF("Interrupt from PORT D calling COP FUNCTION:\r\n");
+//	PRINTF("Interrupt from PORT D calling COP FUNCTION:\r\n");
 	isButtonPressed = 1;
+
 	// Update the last trigger time
 	lastTriggerTime = currentTime;
 	}

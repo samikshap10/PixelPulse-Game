@@ -29,7 +29,7 @@
  * @brief   Application entry point.
  */
 
-
+uint8_t LCDTestFlag = 1;
 
 int main(void) {
 
@@ -42,20 +42,19 @@ int main(void) {
     BOARD_InitDebugConsole();
 #endif
     SysTick_Init();
-    PRINTF("PROJECT\n\r");
     i2c_init();
     init_I2C_LCD();
     initializeIRQ();
-//    i2c_write_byte(0x41);
-    PRINTF("AFTER EVERYTHING");
     create_custom_char();
     init_game_fun();
+    testLCD();
+    automatedTest();
+
+    isButtonPressed= 0; //Making the button pressed 0, as it was acting different before
 
     while(1) {
-//    	if (isButtonPressed){
-    	game_play();
-//    }
 
+    	game_play();
     }
     return 0 ;
 }
