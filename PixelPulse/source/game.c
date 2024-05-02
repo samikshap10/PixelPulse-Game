@@ -4,15 +4,15 @@
 #include "delay.h"
 #include "fsl_debug_console.h"
 
-#define SPRITE_RUN1 0x01
-#define SPRITE_RUN2 0x02
-#define SPRITE_JUMP 0x03
+#define SPRITE_RUN1 0x00
+#define SPRITE_RUN2 0x01
+#define SPRITE_JUMP 0x02
 #define SPRITE_JUMP_UPPER '.'         // Use the '.' character for the head
-#define SPRITE_JUMP_LOWER 0x04
+#define SPRITE_JUMP_LOWER 0x03
 #define SPRITE_TERRAIN_EMPTY ' '      // User the ' ' character
-#define SPRITE_TERRAIN_SOLID 0x05
-#define SPRITE_TERRAIN_SOLID_RIGHT 0x06
-#define SPRITE_TERRAIN_SOLID_LEFT 0x07
+#define SPRITE_TERRAIN_SOLID 0x04
+#define SPRITE_TERRAIN_SOLID_RIGHT 0x05
+#define SPRITE_TERRAIN_SOLID_LEFT 0x06
 
 #define BOY_HORIZONTAL_POSITION 0x01    // Horizontal position of hero on screen
 
@@ -43,7 +43,16 @@ static char terrainLower[TERRAIN_WIDTH + 1];
 uint8_t wasButtonPressed = 1;
 uint8_t i = 0;
 int cursorPos = 0; // Initial position of the cursor
-int pos = 27;
+int pos1 = 0x27;
+int pos2 = 0x28;
+int pos3 = 0x29;
+int pos4 = 0x30;
+int pos5 = 0x31;
+int pos6 = 0x32;
+int pos7 = 0x33;
+int pos8 = 0x34;
+int pos9 = 0x35;
+int pos10 = 0x36;
 
 void init_game_fun(void){
 
@@ -63,9 +72,9 @@ void init_game_fun(void){
 			terrainUpper[i] = SPRITE_TERRAIN_EMPTY;
 			terrainLower[i] = SPRITE_TERRAIN_EMPTY;
 	}
-	  terrainUpper[12] = '\0';
-	  terrainLower[12] = '\0';
-
+	  terrainUpper[16] = '\0';
+	  terrainLower[16] = '\0';
+	  terrainLower[0] = SPRITE_TERRAIN_SOLID;
 }
 
 // Slide the terrain to the left in half-character increments
@@ -120,17 +129,73 @@ void game_play(void){
 			i2c_write_byte(0x07);
 			LCD_Write_4bit_CMD(0x80| 0x43);
 			i2c_write_byte(0x02);
+
 			isButtonPressed = 0;
 		}
 	}
 
-if(pos >= 0x14 ){
-	for (uint8_t i = 0; i < 12; ++i) {
-		LCD_Write_4bit_CMD(0x80| pos);
-		pos--;
-		i2c_write_byte(terrainLower[i]);
-	}
-} else { pos = 0x27; }
+//	LCD_Write_4bit_CMD(0x80 | pos1);
+////	i2c_write_byte(terrainLower[0]); // Print the jth element of terrainLower array
+//	if(pos1 >= 0x15 ){
+//		for (uint8_t j = 0; j < 16; ++j) {
+//		        LCD_Write_4bit_CMD(0x80 | pos1);
+//		        i2c_write_byte(terrainLower[0]); // Print the jth element of terrainLower array
+//		        pos1--;
+//		        LCD_Write_4bit_CMD(0x80 | pos2);
+//		        i2c_write_byte(terrainLower[5]); // Print the jth element of terrainLower array
+//		        pos2--;
+//		        LCD_Write_4bit_CMD(0x80 | pos3);
+//		        i2c_write_byte(terrainLower[9]); // Print the jth element of terrainLower array
+//		        pos3--;
+//		        LCD_Write_4bit_CMD(0x80 | pos4);
+//		        i2c_write_byte(terrainLower[0]); // Print the jth element of terrainLower array
+//		        pos4--;
+//		        LCD_Write_4bit_CMD(0x80 | pos5);
+//		        i2c_write_byte(terrainLower[5]); // Print the jth element of terrainLower array
+//		        pos5--;
+//		        LCD_Write_4bit_CMD(0x80 | pos6);
+//		        i2c_write_byte(terrainLower[9]); // Print the jth element of terrainLower array
+//		        pos6--;
+//		        LCD_Write_4bit_CMD(0x80 | pos7);
+//		        i2c_write_byte(terrainLower[0]); // Print the jth element of terrainLower array
+//		        pos7--;
+//		        LCD_Write_4bit_CMD(0x80 | pos8);
+//		        i2c_write_byte(terrainLower[5]); // Print the jth element of terrainLower array
+//		        pos8--;
+//		        LCD_Write_4bit_CMD(0x80 | pos9);
+//		        i2c_write_byte(terrainLower[9]); // Print the jth element of terrainLower array
+//		        pos9--;
+//		        LCD_Write_4bit_CMD(0x80 | pos10);
+//		        i2c_write_byte(terrainLower[0]); // Print the jth element of terrainLower array
+//		        pos10--;
+//		}
+//
+//	} else { pos1 = 0x27;
+//	pos2 = 0x28;
+//	pos3 = 0x29;}
+
+	for (uint8_t j = 0; j < 16; ++j) {
+			 LCD_Write_4bit_CMD(0x80 | pos1);
+			 i2c_write_byte(terrainLower[0]); // Print the jth element of terrainLower array
+			 pos1--;
+			 LCD_Write_4bit_CMD(0x80 | pos2);
+			 i2c_write_byte(terrainLower[0]); // Print the jth element of terrainLower array
+			 pos2--;
+			 LCD_Write_4bit_CMD(0x80 | pos3);
+			 i2c_write_byte(terrainLower[0]); // Print the jth element of terrainLower array
+			 pos3--;
+			 LCD_Write_4bit_CMD(0x80 | pos4);
+			 i2c_write_byte(terrainLower[6]); // Print the jth element of terrainLower array
+			 pos4--;
+			 LCD_Write_4bit_CMD(0x80 | pos5);
+			 i2c_write_byte(terrainLower[6]); // Print the jth element of terrainLower array
+			 pos5--;
+			 LCD_Write_4bit_CMD(0x80 | pos6);
+			 i2c_write_byte(terrainLower[6]); // Print the jth element of terrainLower array
+			 pos6--;
+			}
+
+
 
 
 
