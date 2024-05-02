@@ -23,5 +23,3 @@ PixelPulse is a simple game implemented on the MKL25Z4 microcontroller. It utili
 2. Power on the system.
 3. Play the game by pressing the button to control the character and navigate through obstacles.
 
-## License
-This project is licensed under the BSD-3-Clause License. See the [LICENSE](LICENSE) file for details.
