@@ -1,3 +1,9 @@
+/*
+ * File: LCD.c
+ * Author: Samiksha Patil
+ * Description: This file contains functions for initializing and controlling an LCD display
+ *              using the I2C protocol on the MKL25Z4 microcontroller.
+ */
 #include <MKL25Z4.H>
 #include "I2C.h"
 #include "LCD.h"
@@ -20,7 +26,7 @@ void init_I2C_LCD(void)
 {
 LCD_Write_4bit_CMD(0x02); // set 4 bit
 Delay(10000);
-LCD_Write_4bit_CMD(0x20); // Function Set  - 4 bit Interface, 1 = 2 lines, 0 = 5x8 font
+LCD_Write_4bit_CMD(0x20); // Function Set  - 4 bit Interface, 0 = 1 lines, 0 = 5x8 font
 Delay(10000);
 LCD_Write_4bit_CMD(0x0C); // Display Set, Cursor position and cursor blinking OFF
 Delay(10000);
@@ -45,14 +51,6 @@ void create_custom_char(void){
 
     LCD_Write_4bit_CMD(0x80| 0x40);
     LCD_Write_4bit_CMD(0x01);
-//    i2c_write_byte(0x00);
-//    i2c_write_byte(0x01);
-//    i2c_write_byte(0x02);
-//    i2c_write_byte(0x03);
-//    i2c_write_byte(0x04);
-//    i2c_write_byte(0x05);
-//    i2c_write_byte(0x06);
-
 
 }
 

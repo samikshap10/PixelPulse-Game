@@ -1,3 +1,10 @@
+/*
+ * File: systime.c
+ * Author: Samiksha Patil
+ * Description: This file contains functions for initializing and handling the system time
+ *              using the SysTick timer on the MKL25Z4 microcontroller.
+ */
+
 #include "systime.h"
 
 uint32_t msTicks = 0;

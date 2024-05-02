@@ -46,15 +46,14 @@ int main(void) {
     init_I2C_LCD();
     initializeIRQ();
     create_custom_char();
-    init_game_fun();
-    testLCD();
-    automatedTest();
+    testLCD();	//TEST LCD - Happy Cases
+    automatedTest(); //Automated test for corner cases
 
     isButtonPressed= 0; //Making the button pressed 0, as it was acting different before
 
     while(1) {
 
-    	game_play();
+    	game_play(); //Game Play function
     }
     return 0 ;
 }

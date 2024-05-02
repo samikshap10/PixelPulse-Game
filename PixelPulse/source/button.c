@@ -1,3 +1,9 @@
+/*
+ * File: button.c
+ * Author: Samiksha Patil
+ * Description: This file contains functions for initializing a hardware interrupt
+ *              for a button connected to the MKL25Z4 microcontroller.
+ */
 #include "button.h"
 #include "fsl_debug_console.h"
 
